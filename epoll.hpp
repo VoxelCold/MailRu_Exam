@@ -6,7 +6,7 @@
 namespace libls {
 	template <class SockType> 
 		class Epoll {
-		static_assert(std::is_base_of<Socket, SockType>::value);
+		//static_assert(std::is_base_of<Socket, SockType>::value);
 		public:
 		Epoll();
 		Epoll(const Epoll&) = delete;
