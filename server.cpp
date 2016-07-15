@@ -63,8 +63,14 @@ void process(SpinQueue & sockQueue, Epoll<TcpSocket> & http){
 			if(recvsz < 1) continue;
 			buf.resize(recvsz);
 			buf.shrink_to_fit();
-			std::cout << "[" << std::this_thread::get_id() << "]: " << buf << std::endl;	
-			std::ifstream file(buf.substr(0,buf.size()-2));
+			std::cout << "[" << std::this_thread::get_id() << "]: " << buf << std::endl;
+
+			std::size_t pos = buf.find("?");
+			if(pos == std::string::npos){
+				pos = buf.find(" ", 4);
+			}
+			
+			std::ifstream file(buf.substr(4, pos-4));
 			std::stringstream ss;
 			if(file.is_open()){
 				file.seekg(0, std::ios::end);
