@@ -69,8 +69,9 @@ void process(SpinQueue & sockQueue, Epoll<TcpSocket> & http){
 			if(pos == std::string::npos){
 				pos = buf.find(" ", 4);
 			}
-			std::cout << "file: {" << (buf.substr(4, pos-4)) << "}" << std::endl;
-			std::ifstream file(buf.substr(5, pos-4));
+			std::string filepath = buf.substr(5, pos-5);
+			std::cout << "file: {" << filepath << "}" << std::endl;
+			std::ifstream file(filepath);
 			std::stringstream ss;
 			if(file.is_open()){
 				file.seekg(0, std::ios::end);
